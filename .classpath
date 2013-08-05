@@ -2,15 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="res/jinput.jar"/>
-	<classpathentry kind="lib" path="res/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="res/jorbis-0.0.15.jar"/>
-	<classpathentry kind="lib" path="res/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="res/lwjgl.jar">
+	<classpathentry kind="lib" path="res/libs/jinput.jar"/>
+	<classpathentry kind="lib" path="res/libs/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="res/libs/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="res/libs/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="res/libs/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RPG Adventure/natives/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RPG Adventure/res/libs/natives/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="res/slick.jar" sourcepath="res/Slick_Src.zip"/>
+	<classpathentry kind="lib" path="res/libs/Slick_Src.zip"/>
+	<classpathentry kind="lib" path="res/libs/slick.jar" sourcepath="res/libs/Slick_Src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -3,10 +3,7 @@ package me.Gugino.adventure.Entities;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
-import Interfaces.IRender;
-import Interfaces.IUpdate;
-
-public class Entity implements IRender, IUpdate {
+public class Entity {
 	
 	protected float x;
 	protected float y;
@@ -18,12 +15,10 @@ public class Entity implements IRender, IUpdate {
 		this.y = y;
 	}
 
-	@Override
 	public void Update(Input input, int delta) {
 		
 	}
 
-	@Override
 	public void Render(Graphics g) {
 		
 	}
