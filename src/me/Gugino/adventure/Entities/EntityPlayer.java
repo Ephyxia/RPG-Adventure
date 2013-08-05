@@ -46,10 +46,10 @@ public class EntityPlayer extends Entity {
 			ss = new SpriteSheet("res/images/strips/male_walk_down.png", 48, 96);
 			anims[DOWN] = new Animation(ss, 150);
 
-			ss = new SpriteSheet("res/images/strips/male_walk_down.png", 48, 96);
+			ss = new SpriteSheet("res/images/strips/male_walk_left.png", 48, 96);
 			anims[LEFT] = new Animation(ss, 150);
 
-			ss = new SpriteSheet("res/images/strips/male_walk_down.png", 48, 96);
+			ss = new SpriteSheet("res/images/strips/male_walk_right.png", 48, 96);
 			anims[RIGHT] = new Animation(ss, 150);
 
 			ss = new SpriteSheet("res/images/strips/male_walk_up.png", 48, 96);
@@ -89,9 +89,7 @@ public class EntityPlayer extends Entity {
 				direction = DOWN;
 				moving = true;
 				anims[direction].start();
-			}
-
-			if (input.isKeyDown(Input.KEY_A)) {
+			} else if (input.isKeyDown(Input.KEY_A)) {
 				dx = -speed;
 				tx = (int) (x - 48);
 				direction = LEFT;
@@ -111,6 +109,7 @@ public class EntityPlayer extends Entity {
 			if (dy > 0 && y > ty) {
 				if (input.isKeyDown(Input.KEY_S)) {
 					ty += 48;
+					dx = 0;
 				} else {
 					y = ty;
 					dy = 0;
@@ -122,6 +121,7 @@ public class EntityPlayer extends Entity {
 			} else if (dy < 0 && y < ty) {
 				if (input.isKeyDown(Input.KEY_W)) {
 					ty -= 48;
+					dx = 0;
 				} else {
 					y = ty;
 					dy = 0;
@@ -134,6 +134,7 @@ public class EntityPlayer extends Entity {
 			if (dx > 0 && x > tx) {
 				if (input.isKeyDown(Input.KEY_D)) {
 					tx += 48;
+					dy = 0;
 				} else {
 					x = tx;
 					dx = 0;
@@ -144,6 +145,7 @@ public class EntityPlayer extends Entity {
 			} else if (dx < 0 && x < tx) {
 				if (input.isKeyDown(Input.KEY_A)) {
 					tx -= 48;
+					dy = 0;
 				} else {
 					x = tx;
 					dx = 0;
