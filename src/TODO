@@ -5,11 +5,23 @@ Make Menu Sprites
 Make menu Interactive
 Saving/ loading system
 Set up Player
-Movement physics
+++Movement physics
 Collision shit
 figure out how to handle map making / loading
 Set up Enemys
 Set up Inventory Screen
 Create Sprites
-
+build an xml parser. eg FileLoader.getLevel("Test").getPlayerSpawnX();
+camera offset handling
 Text display for talking to people
+
+
+*=================================*
+*===Planned Level Saving Layout===*
+*=================================*
+<level name="Test">
+		<entity type="NPC" sprite="5" title="Jimmy" oninteract="Hey there champ I'm just some test #dialogue don't mind me!"  remove="1" x="5" y="4" />
+		<item type="MasterKey" x="6" y="7" />
+		<entity type="Player" x="5" y="12" />
+</level>
+

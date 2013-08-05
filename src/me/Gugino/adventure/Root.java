@@ -2,20 +2,23 @@ package me.Gugino.adventure;
 
 import me.Gugino.adventure.State.StateManager;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 public class Root extends BasicGame {
 
 	public static final String title = "RPG Adventure!";
 	public static final int width = 1280;
 	public static final int height = 768;
-
+	
 	public Root() {
 		super(title);
 	}
@@ -34,7 +37,7 @@ public class Root extends BasicGame {
 	public void init(GameContainer gc) throws SlickException {
 		StateManager.Init();
 
-		StateManager.enterState(StateManager.MAIN_MENU_STATE);
+//		StateManager.enterState(StateManager.MAIN_MENU_STATE);
 		StateManager.enterState(StateManager.GAMEPLAY_STATE);
 	}
 
@@ -53,7 +56,6 @@ public class Root extends BasicGame {
 	}
 
 	private void drawDebug(Graphics g) {
-		
 		g.setColor(Color.decode("#0080ff"));
 		
 //		for (int i = 0; i <= Root.width; i += 48) {

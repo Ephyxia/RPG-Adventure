@@ -19,6 +19,8 @@ public class GamePlayState extends GameState  {
 	@Override
 	public void Init() {
 		player = new EntityPlayer(480, 480);
+		
+		
 	}
 
 	@Override

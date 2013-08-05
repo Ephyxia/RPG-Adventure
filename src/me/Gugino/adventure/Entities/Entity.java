@@ -15,6 +15,10 @@ public class Entity {
 		this.y = y;
 	}
 
+	public void Init() {
+		
+	}
+
 	public void Update(Input input, int delta) {
 		
 	}
