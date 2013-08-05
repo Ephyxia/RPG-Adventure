@@ -52,7 +52,7 @@ public class EntityPlayer extends Entity {
 			ss = new SpriteSheet("res/images/strips/male_walk_down.png", 48, 96);
 			anims[RIGHT] = new Animation(ss, 150);
 
-			ss = new SpriteSheet("res/images/strips/male_walk_down.png", 48, 96);
+			ss = new SpriteSheet("res/images/strips/male_walk_up.png", 48, 96);
 			anims[UP] = new Animation(ss, 150);
 
 			for (int i = 1; i < anims.length; i++) {
@@ -104,7 +104,7 @@ public class EntityPlayer extends Entity {
 				moving = true;
 				anims[direction].start();
 			}
-		} else {
+		} else { // Clean this shit up later
 			x += dx;
 			y += dy;
 
@@ -117,7 +117,6 @@ public class EntityPlayer extends Entity {
 					moving = false;
 					anims[direction].stop();
 					anims[direction].setCurrentFrame(1);
-					System.out.println("sadegr");
 				}
 
 			} else if (dy < 0 && y < ty) {
