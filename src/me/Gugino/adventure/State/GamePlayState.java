@@ -41,7 +41,7 @@ public class GamePlayState extends GameState  {
 
 	@Override
 	public void Render(Graphics g) {
-		bg.draw(0,-24);
+		bg.draw(-28, 0);
 		player.render(g);
 	}
 }
