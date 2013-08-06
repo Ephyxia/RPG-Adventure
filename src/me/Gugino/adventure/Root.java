@@ -15,8 +15,6 @@ import org.newdawn.slick.SpriteSheet;
 
 public class Root extends BasicGame {
 
-	// liquid ass
-	
 	public static final String title = "RPG Adventure!";
 	public static final int width = 1280;
 	public static final int height = 768;
