@@ -45,8 +45,6 @@ public class GamePlayState extends GameState  {
 
 	@Override
 	public void Render(Graphics g) {
-//		map.render(0, 0);
-//		map.render(0, 0, 0, 0, 22, 14);
 		map.render(0, 0, 0, 0, 22, 14, 0, false); // Render ground layer
 		map.render(0, 0, 0, 0, 22, 14, 1, false); // Render objects layer
 		player.render(g);
