@@ -75,7 +75,7 @@ public class EntityPlayer extends Entity {
 		move(delta, input);
 
 		gx = (int) ((x - (x % 64)) / 64);
-		gy = (int) ((y - (y % 64)) / 64);
+		gy = (int) ((y - (y % 64)) / 64) + 1;
 		
 		speed = .2f;
 	}

@@ -13,8 +13,11 @@ public class GamePlayState extends GameState {
 
 	private int mx;
 	private int my;
+	
+	private boolean renderGround = true;
+	private boolean renderObjects = true;
 
-//	private TiledMap map;
+	//	private TiledMap map;
 	private Map map;
 
 	public static EntityPlayer player;
@@ -27,7 +30,7 @@ public class GamePlayState extends GameState {
 	public void Init() {
 		player = new EntityPlayer(5, 5);
 
-			map = new Map("res/maps/test.json");
+		map = new Map("res/maps/test.json");
 	}
 
 	@Override
@@ -35,13 +38,29 @@ public class GamePlayState extends GameState {
 		mx = input.getMouseX();
 		my = input.getMouseY();
 
+		if(input.isKeyPressed(Input.KEY_NUMPAD0)) {
+			renderGround = ! renderGround;
+		}
+		if(input.isKeyPressed(Input.KEY_NUMPAD1)) {
+			renderObjects = ! renderObjects;
+		}
+		if(input.isKeyPressed(Input.KEY_NUMPAD2)) {
+			StateManager.enterState(StateManager.GAMEPLAY_STATE);
+		}
+		
 		player.update(delta, input);
 	}
 
 	@Override
 	public void Render(Graphics g) {
-//		 map.render(0, 0, 0, 0, 22, 14, 0, false); // Render ground layer
-//		 map.render(0, 0, 0, 0, 22, 14, 1, false); // Render objects layer
+		//		map.Render(g);
+//		if (renderGround)
+//			map.renderLayerFull(g, 0);
+//		if (renderObjects)
+//			map.renderLayerFull(g, 1);
+//		
+		map.renderPortion(0, 0, 21, 14);
+		
 		player.render(g);
 	}
 }

@@ -37,19 +37,41 @@ public class Layer {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void RenderAll(Graphics g) {
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles[0].length; j++) {
+		for (int i = 0; i < tiles.length; i++) { // cols
+			for (int j = 0; j < tiles[0].length; j++) { // rows
 				int xt;
 				int yt;
 
-				xt = tiles[i][j].getTileID() % width;
-				yt = (int) Math.floor(tiles[i][j].getTileID() / height);
+				if (tiles[i][j].getTileID() != 0) {
+					xt = tiles[i][j].getTileID() % 16 - 1;
+					yt = (int) Math.floor(tiles[i][j].getTileID() / 16);
+
+					spriteSheet.getSubImages()[yt][xt].draw(j * 64, i * 64);
+				}
 			}
 		}
 	}
 
-	public String getName() {return name;}
+	public String getName() {
+		return name;
+	}
+
+	public void renderPortion(int sx, int sy, int rWidth, int rHeight) {
+		for (int i = sy; i < rHeight + sy; i++) { // cols
+			for (int j = sx; j < rWidth + sx; j++) { // rows
+				int xt;
+				int yt;
+
+				if (tiles[i][j].getTileID() != 0) {
+					xt = tiles[i][j].getTileID() % 16 - 1;
+					yt = (int) Math.floor(tiles[i][j].getTileID() / 16);
+
+					spriteSheet.getSubImages()[yt][xt].draw((j * 64), (i * 64));
+				}
+			}
+		}
+	}
 
 }

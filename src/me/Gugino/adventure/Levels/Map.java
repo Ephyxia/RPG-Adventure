@@ -1,8 +1,9 @@
 package me.Gugino.adventure.Levels;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import org.newdawn.slick.tiled.TileSet;
+import org.newdawn.slick.Graphics;
 
 public class Map {
 	private ArrayList<Layer> layers;
@@ -22,8 +23,6 @@ public class Map {
 		String imgPath = null;
 		String[] pd = new String[10];
 		String[] tileIds = null;
-		//		String[] tileIds = new String[4096];
-		ArrayList<String[]> layerPH = new ArrayList<String[]>();
 
 		while (!done) {
 			for (int i = 0; i < rawFile.length; i++) {
@@ -48,14 +47,14 @@ public class Map {
 
 						if (rawFile[i].trim().startsWith("}")) {
 							inLayer = false;
-							
+
 							System.out.println("\nLayer added!");
 							System.out.println("Width: " + pd[0]);
 							System.out.println("Height: " + pd[1]);
 							System.out.println("Name: " + pd[2]);
 							System.out.println("Tiles: " + tileIds.length);
 							layers.add(new Layer(pd[2], Integer.parseInt(pd[0]), Integer.parseInt(pd[1]), tileIds));
-							
+
 							if (rawFile[i].trim().startsWith("}]")) {
 								layerFound = false;
 							}
@@ -77,8 +76,24 @@ public class Map {
 			e.setSpriteSheet(imgPath);
 			System.out.println("Attached spritesheet " + imgPath + " to layer " + e.getName());
 		}
-		
+
 		long finishTime = System.currentTimeMillis();
 		System.out.println("\n load time = " + (finishTime - startTime) + "ms.");
+	}
+
+	public void renderAll(Graphics g) {
+		for (Layer l : layers) {
+			l.RenderAll(g);
+		}
+	}
+	
+	public void renderPortion(int sx, int sy, int width, int height) {
+		for (Layer l : layers) {
+			l.renderPortion(sx, sy, width, height);
+		}
+	}
+
+	public void renderLayerFull(Graphics g, int index) {
+		layers.get(index).RenderAll(g);
 	}
 }
