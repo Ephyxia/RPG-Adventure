@@ -8,4 +8,6 @@ public class Tile {
 	public Tile(int tileID) {
 		this.tileID = tileID;
 	}
+
+	public int getTileID() {return tileID;}
 }

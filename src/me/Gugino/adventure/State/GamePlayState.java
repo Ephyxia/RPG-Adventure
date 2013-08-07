@@ -14,8 +14,6 @@ public class GamePlayState extends GameState {
 	private int mx;
 	private int my;
 
-	private Image bg;
-
 //	private TiledMap map;
 	private Map map;
 
@@ -29,13 +27,7 @@ public class GamePlayState extends GameState {
 	public void Init() {
 		player = new EntityPlayer(5, 5);
 
-		try {
-			bg = new Image("res/images/strips/testBG.png");
-//			map = new TiledMap("res/maps/test.tmx");
 			map = new Map("res/maps/test.json");
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override

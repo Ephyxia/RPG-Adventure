@@ -11,7 +11,7 @@ public class Map {
 	public Map(String filePath) {
 
 		layers = new ArrayList<Layer>();
-		
+
 		long startTime = System.currentTimeMillis();
 
 		String[] rawFile = FileHandler.getRawFile(filePath);
@@ -19,9 +19,11 @@ public class Map {
 		boolean layerFound = false;
 		boolean inLayer = false;
 		boolean done = false;
+		String imgPath = null;
 		String[] pd = new String[10];
-//		String[] tileIds = null;
-		String[] tileIds = new String[4096];
+		String[] tileIds = null;
+		//		String[] tileIds = new String[4096];
+		ArrayList<String[]> layerPH = new ArrayList<String[]>();
 
 		while (!done) {
 			for (int i = 0; i < rawFile.length; i++) {
@@ -46,23 +48,39 @@ public class Map {
 
 						if (rawFile[i].trim().startsWith("}")) {
 							inLayer = false;
+							
+							System.out.println("\nLayer added!");
+							System.out.println("Width: " + pd[0]);
+							System.out.println("Height: " + pd[1]);
+							System.out.println("Name: " + pd[2]);
+							System.out.println("Tiles: " + tileIds.length);
+							layers.add(new Layer(pd[2], Integer.parseInt(pd[0]), Integer.parseInt(pd[1]), tileIds));
+							
 							if (rawFile[i].trim().startsWith("}]")) {
 								layerFound = false;
-								done = true;
 							}
-							System.out.println("\nLayer added!");
-								System.out.println("Width: " + pd[0]);
-								System.out.println("Height: " + pd[1]);
-								System.out.println("Name: " + pd[2]);
-								System.out.println("Tiles: " + tileIds.length);
-								layers.add(new Layer(pd[2], Integer.parseInt(pd[0]), Integer.parseInt(pd[1]), tileIds));
 						}
 					} // End inLayer
 				} // End layerFound
+
+				if (rawFile[i].trim().startsWith("\"image\"")) {
+					imgPath = rawFile[i].split("\"")[3].replace("\\/", "/").replace("..", "res");
+				}
+
+				if (rawFile[i].startsWith("}")) {
+					done = true;
+				}
 			}
 		}
 
+		for (Layer e : layers) {
+			e.setSpriteSheet(imgPath);
+			System.out.println("Attached spritesheet " + imgPath + " to layer " + e.getName());
+		}
+		
+		System.out.println(layers.get(0).getName());
+
 		long finishTime = System.currentTimeMillis();
-		System.out.println("\n load time = " + (finishTime - startTime));
+		System.out.println("\n load time = " + (finishTime - startTime) + "ms.");
 	}
 }
