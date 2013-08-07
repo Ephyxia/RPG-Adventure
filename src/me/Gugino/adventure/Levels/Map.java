@@ -78,8 +78,6 @@ public class Map {
 			System.out.println("Attached spritesheet " + imgPath + " to layer " + e.getName());
 		}
 		
-		System.out.println(layers.get(0).getName());
-
 		long finishTime = System.currentTimeMillis();
 		System.out.println("\n load time = " + (finishTime - startTime) + "ms.");
 	}
