@@ -1,5 +1,6 @@
 package me.Gugino.adventure;
 
+import me.Gugino.adventure.Levels.Map;
 import me.Gugino.adventure.State.StateManager;
 
 import org.newdawn.slick.Animation;
@@ -29,7 +30,7 @@ public class Root extends BasicGame {
 		app.setDisplayMode(width, height, false);
 		app.setAlwaysRender(true);
 		app.setUpdateOnlyWhenVisible(false);
-		app.setTargetFrameRate(60);
+//		app.setTargetFrameRate(60);
 		app.start();
 	}
 
@@ -39,6 +40,8 @@ public class Root extends BasicGame {
 
 //		StateManager.enterState(StateManager.MAIN_MENU_STATE);
 		StateManager.enterState(StateManager.GAMEPLAY_STATE);
+		
+//		Map.loadMap("res/maps/test.lua");
 	}
 
 	@Override
@@ -58,11 +61,11 @@ public class Root extends BasicGame {
 	private void drawDebug(Graphics g) {
 		g.setColor(Color.decode("#0080ff"));
 		
-//		for (int i = 0; i <= Root.width; i += 48) {
+//		for (int i = 0; i <= Root.width; i += 64) {
 //			g.drawLine(i, 0, i, Root.height);
 //		}
 //		
-//		for (int j = 0; j <= Root.height; j += 48) {
+//		for (int j = 0; j <= Root.height; j += 64) {
 //			g.drawLine(0, j, Root.width, j);
 //		}
 	}

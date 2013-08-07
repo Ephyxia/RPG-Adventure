@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 public class GamePlayState extends GameState  {
 
@@ -13,6 +14,8 @@ public class GamePlayState extends GameState  {
 	private int my;
 	
 	private Image bg;
+	
+	private TiledMap map;
 	
 	public static EntityPlayer player;
 
@@ -22,10 +25,11 @@ public class GamePlayState extends GameState  {
 
 	@Override
 	public void Init() {
-		player = new EntityPlayer(480, 480);
+		player = new EntityPlayer(5, 5);
 		
 		try {
 			bg = new Image("res/images/strips/testBG.png");
+			map = new TiledMap("res/maps/test.tmx");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -41,7 +45,10 @@ public class GamePlayState extends GameState  {
 
 	@Override
 	public void Render(Graphics g) {
-		bg.draw(-28, 0);
+//		map.render(0, 0);
+//		map.render(0, 0, 0, 0, 22, 14);
+		map.render(0, 0, 0, 0, 22, 14, 0, false); // Render ground layer
+		map.render(0, 0, 0, 0, 22, 14, 1, false); // Render objects layer
 		player.render(g);
 	}
 }

@@ -15,14 +15,15 @@ public class EntityPlayer extends Entity {
 	private static final int UP = 4;
 
 	private static int tileWidth = 64;
-	
+
 	protected static int width = tileWidth;
 	protected static int height = tileWidth * 2;
 
-	protected float speed = 2.5f;
+	protected float speed = 0.2f;
 
 	protected float dx = 0, dy = 0;
 	protected int tx = 0, ty = 0;
+	protected int gx = 0, gy = 0;
 
 	boolean moving = false;
 
@@ -31,7 +32,9 @@ public class EntityPlayer extends Entity {
 	public Animation[] anims = new Animation[5];
 
 	public EntityPlayer(int x, int y) {
-		super(x, y);
+		super(x * 64, y * 64);
+		gx = x % 64;
+		gy = y % 64;
 		Init();
 	}
 
@@ -46,16 +49,16 @@ public class EntityPlayer extends Entity {
 		SpriteSheet ss;
 		try {
 			ss = new SpriteSheet("res/images/strips/male_walk_down.png", tileWidth, tileWidth * 2);
-			anims[DOWN] = new Animation(ss, 150);
+			anims[DOWN] = new Animation(ss, 125);
 
 			ss = new SpriteSheet("res/images/strips/male_walk_left.png", tileWidth, tileWidth * 2);
-			anims[LEFT] = new Animation(ss, 150);
+			anims[LEFT] = new Animation(ss, 125);
 
 			ss = new SpriteSheet("res/images/strips/male_walk_right.png", tileWidth, tileWidth * 2);
-			anims[RIGHT] = new Animation(ss, 150);
+			anims[RIGHT] = new Animation(ss, 125);
 
 			ss = new SpriteSheet("res/images/strips/male_walk_up.png", tileWidth, tileWidth * 2);
-			anims[UP] = new Animation(ss, 150);
+			anims[UP] = new Animation(ss, 125);
 
 			for (int i = 1; i < anims.length; i++) {
 				anims[i].setPingPong(true);
@@ -70,6 +73,11 @@ public class EntityPlayer extends Entity {
 
 	public void update(int delta, Input input) {
 		move(delta, input);
+
+		gx = (int) ((x - (x % 64)) / 64);
+		gy = (int) ((y - (y % 64)) / 64);
+		
+		speed = .2f;
 	}
 
 	private void move(int delta, Input input) {
@@ -84,29 +92,30 @@ public class EntityPlayer extends Entity {
 				ty = (int) (y - tileWidth);
 				direction = UP;
 				moving = true;
-				anims[direction].start();
 			} else if (input.isKeyDown(Input.KEY_S)) {
 				dy = speed;
 				ty = (int) (y + tileWidth);
 				direction = DOWN;
 				moving = true;
-				anims[direction].start();
 			} else if (input.isKeyDown(Input.KEY_A)) {
 				dx = -speed;
 				tx = (int) (x - tileWidth);
 				direction = LEFT;
 				moving = true;
-				anims[direction].start();
 			} else if (input.isKeyDown(Input.KEY_D)) {
 				dx = speed;
 				tx = (int) (x + tileWidth);
 				direction = RIGHT;
 				moving = true;
+			}
+
+			if (moving) {
 				anims[direction].start();
 			}
 		} else { // Clean this shit up later
-			x += dx;
-			y += dy;
+			
+			x += dx * delta;
+			y += dy * delta;
 
 			if (dy > 0 && y > ty) {
 				if (input.isKeyDown(Input.KEY_S)) {
@@ -165,6 +174,10 @@ public class EntityPlayer extends Entity {
 		// g.fillRect(x + 1, y + 1, width - 2, height - 2);
 
 		anims[direction].draw(x, y);
+		g.setColor(Color.white);
+
+		g.drawString("Grid x: " + gx, 10, 32);
+		g.drawString("Grid y: " + gy, 10, 48);
 	}
 
 }
