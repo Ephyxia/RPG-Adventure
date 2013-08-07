@@ -1,18 +1,14 @@
 package me.Gugino.adventure;
 
-import me.Gugino.adventure.Levels.Map;
 import me.Gugino.adventure.State.StateManager;
 
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 public class Root extends BasicGame {
 
@@ -42,6 +38,7 @@ public class Root extends BasicGame {
 		StateManager.enterState(StateManager.GAMEPLAY_STATE);
 		
 //		Map.loadMap("res/maps/test.lua");
+		
 	}
 
 	@Override
@@ -60,13 +57,5 @@ public class Root extends BasicGame {
 
 	private void drawDebug(Graphics g) {
 		g.setColor(Color.decode("#0080ff"));
-		
-//		for (int i = 0; i <= Root.width; i += 64) {
-//			g.drawLine(i, 0, i, Root.height);
-//		}
-//		
-//		for (int j = 0; j <= Root.height; j += 64) {
-//			g.drawLine(0, j, Root.width, j);
-//		}
 	}
 }
