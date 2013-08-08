@@ -22,6 +22,5 @@ public class SpriteSheet {
 			}
 		}
 	}
-	
 	public Image[][] getSubImages() {return subImages;}
 }

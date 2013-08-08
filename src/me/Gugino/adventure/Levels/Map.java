@@ -93,6 +93,12 @@ public class Map {
 		}
 	}
 
+	public void renderPortion(int sx, int sy, int width, int height, float xOff, float yOff) {
+		for (Layer l : layers) {
+			l.renderPortionWithOffset(sx, sy, width, height, xOff, yOff);
+		}
+	}
+
 	public void renderLayerFull(Graphics g, int index) {
 		layers.get(index).RenderAll(g);
 	}

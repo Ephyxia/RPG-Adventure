@@ -1,5 +1,7 @@
 package me.Gugino.adventure.Entities;
 
+import me.Gugino.adventure.State.Camera;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -32,7 +34,7 @@ public class EntityPlayer extends Entity {
 	public Animation[] anims = new Animation[5];
 
 	public EntityPlayer(int x, int y) {
-		super(x * 64, y * 64);
+		super(x * 64, y * 64 - 64);
 		gx = x % 64;
 		gy = y % 64;
 		Init();
@@ -116,6 +118,8 @@ public class EntityPlayer extends Entity {
 			
 			x += dx * delta;
 			y += dy * delta;
+//			Camera.xOff += dx * delta;
+//			Camera.yOff += dy * delta;
 
 			if (dy > 0 && y > ty) {
 				if (input.isKeyDown(Input.KEY_S)) {
@@ -167,13 +171,15 @@ public class EntityPlayer extends Entity {
 			}
 		}
 
+		Camera.xOff = x - 576;
+		Camera.yOff = y - 320;
 	}
 
 	public void render(Graphics g) {
 		// g.setColor(Color.white);
 		// g.fillRect(x + 1, y + 1, width - 2, height - 2);
 
-		anims[direction].draw(x, y);
+		anims[direction].draw(x - Camera.xOff, y - Camera.yOff);
 		g.setColor(Color.white);
 
 		g.drawString("Grid x: " + gx, 10, 32);

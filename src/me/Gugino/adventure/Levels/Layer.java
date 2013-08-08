@@ -59,6 +59,10 @@ public class Layer {
 	}
 
 	public void renderPortion(int sx, int sy, int rWidth, int rHeight) {
+		renderPortionWithOffset(sx, sy, rWidth, rHeight, 0, 0);
+	}
+
+	public void renderPortionWithOffset(int sx, int sy, int rWidth, int rHeight, float xOff, float yOff) {
 		for (int i = sy; i < rHeight + sy; i++) { // cols
 			for (int j = sx; j < rWidth + sx; j++) { // rows
 				int xt;
@@ -68,7 +72,7 @@ public class Layer {
 					xt = tiles[i][j].getTileID() % 16 - 1;
 					yt = (int) Math.floor(tiles[i][j].getTileID() / 16);
 
-					spriteSheet.getSubImages()[yt][xt].draw((j * 64), (i * 64));
+					spriteSheet.getSubImages()[yt][xt].draw((j * 64) - (int) xOff, (i * 64) - (int) yOff);
 				}
 			}
 		}
