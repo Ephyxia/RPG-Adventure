@@ -49,7 +49,7 @@ public class GamePlayState extends GameState {
 			renderObjects = !renderObjects;
 		}
 		if (input.isKeyPressed(Input.KEY_NUMPAD2)) {
-			StateManager.enterState(StateManager.GAMEPLAY_STATE);
+			map = new Map("res/maps/test.json");
 		}
 
 		player.update(delta, input);

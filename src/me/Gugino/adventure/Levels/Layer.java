@@ -71,7 +71,7 @@ public class Layer {
 				if (tiles[i][j].getTileID() != 0) {
 					xt = tiles[i][j].getTileID() % 16 - 1;
 					yt = (int) Math.floor(tiles[i][j].getTileID() / 16);
-
+					
 					spriteSheet.getSubImages()[yt][xt].draw((j * 64) - (int) xOff, (i * 64) - (int) yOff);
 				}
 			}
