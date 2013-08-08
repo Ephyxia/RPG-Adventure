@@ -32,7 +32,7 @@ public class GamePlayState extends GameState {
 
 	@Override
 	public void Init() {
-		player = new EntityPlayer(9, 6);
+		player = new EntityPlayer(9, 58);
 
 		map = new Map("res/maps/test.json");
 	}
@@ -50,19 +50,6 @@ public class GamePlayState extends GameState {
 		}
 		if (input.isKeyPressed(Input.KEY_NUMPAD2)) {
 			StateManager.enterState(StateManager.GAMEPLAY_STATE);
-		}
-
-		if (input.isKeyDown(Input.KEY_UP)) {
-			Camera.yOff -= 1.0f;
-		}
-		if (input.isKeyDown(Input.KEY_DOWN)) {
-			Camera.yOff += 1.0f;
-		}
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
-			Camera.xOff += 1.0f;
-		}
-		if (input.isKeyDown(Input.KEY_LEFT)) {
-			Camera.xOff -= 1.0f;
 		}
 
 		player.update(delta, input);
