@@ -29,14 +29,9 @@ public class Layer {
 		}
 	}
 
-	public void setSpriteSheet(String path) {
-		try {
-			Image ph = new Image(path);
-			this.spriteSheet = new SpriteSheet(ph, 64, 64);
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void setSpriteSheet(String path) {
+//		this.spriteSheet = new SpriteSheet(path, 64, 64);
+//	}
 
 	public void RenderAll(Graphics g) {
 		for (int i = 0; i < tiles.length; i++) { // cols
@@ -57,9 +52,11 @@ public class Layer {
 	public String getName() {
 		return name;
 	}
+
 	public int getWidth() {
 		return width;
 	}
+
 	public int getHeight() {
 		return height;
 	}
@@ -77,7 +74,7 @@ public class Layer {
 				if (tiles[i][j].getTileID() != 0) {
 					xt = tiles[i][j].getTileID() % spriteSheet.getNumTilesX() - 1;
 					yt = (int) Math.floor(tiles[i][j].getTileID() / spriteSheet.getNumTilesY());
-					
+
 					spriteSheet.getSubImages()[yt][xt].draw((j * 64) - (int) xOff, (i * 64) - (int) yOff);
 				}
 			}

@@ -1,6 +1,7 @@
 package me.Gugino.adventure.Levels;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class SpriteSheet {
 
@@ -8,17 +9,25 @@ public class SpriteSheet {
 
 	private int numTilesX;
 	private int numTilesY;
+	
+	private int firstGID;
 
-	public SpriteSheet(Image img, int tileWidth, int tileHeight) {
+	public SpriteSheet(String path, int tileWidth, int tileHeight, int gid) {
 
+		this.firstGID = gid;
+		
+		Image img = null;
+		try {
+			img = new Image(path);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		
 		int imgWidth = img.getWidth();
 		int imgHeight = img.getHeight();
 
 		numTilesX = (int) Math.floor(imgWidth / tileWidth);
 		numTilesY = (int) Math.floor(imgHeight / tileHeight);
-
-		System.out.println("SpriteSheet X Tiles: " + numTilesX);
-		System.out.println("SpriteSheet Y Tiles: " + numTilesY);
 
 		subImages = new Image[numTilesY][numTilesX];
 
@@ -28,6 +37,8 @@ public class SpriteSheet {
 			}
 		}
 	}
+	
+	
 
 	public Image[][] getSubImages() {
 		return subImages;

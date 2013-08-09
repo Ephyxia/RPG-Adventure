@@ -8,10 +8,12 @@ import org.newdawn.slick.Graphics;
 public class Map {
 	private ArrayList<Layer> layers;
 	private ArrayList<MapObject> objects;
+	private ArrayList<SpriteSheet> spriteSheets;
 
 	public Map(String filePath) {
 
 		layers = new ArrayList<Layer>();
+		spriteSheets = new ArrayList<SpriteSheet>();
 
 		long startTime = System.currentTimeMillis();
 
@@ -19,22 +21,28 @@ public class Map {
 
 		boolean layerFound = false;
 		boolean inLayer = false;
+		boolean tileSetsFound = false;
+		boolean inTilesets = false;
 		boolean done = false;
-		String imgPath = null;
+		String[] imgPath = null;
 		String[] pd = new String[10];
+		String[] id = new String[10];
 		String[] tileIds = null;
 
+		try {
 		while (!done) {
 			for (int i = 0; i < rawFile.length; i++) {
 				if (rawFile[i].trim().startsWith("\"layers\""))
 					layerFound = true;
+				if (rawFile[i].trim().startsWith("\"tilesets\""))
+					tileSetsFound = true;
 
-				if (layerFound) {
+				if (layerFound) { // found layer tag
 					if (rawFile[i].trim().startsWith("{")) { // found opening brace for a layer
 						inLayer = true;
 					}
 
-					if (inLayer) {
+					if (inLayer) { // in layer braces
 						if (rawFile[i].trim().startsWith("\"data\"")) {
 							tileIds = rawFile[i].split("\\[")[1].split("\\]")[0].split(",");
 						} else if (rawFile[i].trim().startsWith("\"width\"")) {
@@ -62,8 +70,28 @@ public class Map {
 					} // End inLayer
 				} // End layerFound
 
-				if (rawFile[i].trim().startsWith("\"image\"")) {
-					imgPath = rawFile[i].split("\"")[3].replace("\\/", "/").replace("..", "res");
+				if (tileSetsFound) {
+					if (rawFile[i].trim().startsWith("{")) { // found opening brace for a layer
+						inTilesets = true;
+					}
+
+					if (inTilesets) {
+						if (rawFile[i].trim().startsWith("\"firstgid\"")) {
+							id[0] = rawFile[i].split(":")[1].split(",")[0];
+						} else if (rawFile[i].trim().startsWith("\"image\"")) {
+							id[1] = rawFile[i].split(":")[1].split(",")[0];
+						}
+
+						if (rawFile[i].startsWith("        }")) {
+							inTilesets = false;
+							spriteSheets.add(new SpriteSheet(id[1].split("\"")[1].replace("\\/", "/").replace("..", "res"), 64, 64, Integer.parseInt(id[0])));
+							System.out.println("Spritesheet " + id[1] + " added.");
+						}
+
+						if (rawFile[i].trim().startsWith("}]")) {
+							tileSetsFound = false;
+						}
+					}
 				}
 
 				if (rawFile[i].startsWith("}")) {
@@ -71,10 +99,8 @@ public class Map {
 				}
 			}
 		}
-
-		for (Layer e : layers) {
-			e.setSpriteSheet(imgPath);
-			System.out.println("Attached spritesheet " + imgPath + " to layer " + e.getName());
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
 		}
 
 		long finishTime = System.currentTimeMillis();
@@ -86,7 +112,7 @@ public class Map {
 			l.RenderAll(g);
 		}
 	}
-	
+
 	public void renderPortion(int sx, int sy, int width, int height) {
 		for (Layer l : layers) {
 			l.renderPortion(sx, sy, width, height);
@@ -102,7 +128,7 @@ public class Map {
 	public void renderLayerFull(Graphics g, int index) {
 		layers.get(index).RenderAll(g);
 	}
-	
+
 	public int getWidth() {
 		return layers.get(0).getWidth();
 	}
