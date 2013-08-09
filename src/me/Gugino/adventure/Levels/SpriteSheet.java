@@ -6,14 +6,20 @@ public class SpriteSheet {
 
 	private Image[][] subImages;
 
+	private int numTilesX;
+	private int numTilesY;
+
 	public SpriteSheet(Image img, int tileWidth, int tileHeight) {
 
 		int imgWidth = img.getWidth();
 		int imgHeight = img.getHeight();
 
-		int numTilesX = (int) Math.floor(imgWidth / tileWidth);
-		int numTilesY = (int) Math.floor(imgHeight / tileHeight);
-		
+		numTilesX = (int) Math.floor(imgWidth / tileWidth);
+		numTilesY = (int) Math.floor(imgHeight / tileHeight);
+
+		System.out.println("SpriteSheet X Tiles: " + numTilesX);
+		System.out.println("SpriteSheet Y Tiles: " + numTilesY);
+
 		subImages = new Image[numTilesY][numTilesX];
 
 		for (int i = 0; i < numTilesY; i++) {
@@ -22,5 +28,16 @@ public class SpriteSheet {
 			}
 		}
 	}
-	public Image[][] getSubImages() {return subImages;}
+
+	public Image[][] getSubImages() {
+		return subImages;
+	}
+
+	public int getNumTilesX() {
+		return numTilesX;
+	}
+
+	public int getNumTilesY() {
+		return numTilesY;
+	}
 }

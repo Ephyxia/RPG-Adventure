@@ -84,42 +84,46 @@ public class EntityPlayer extends Entity {
 
 	private void move(int delta, Input input) {
 
+
+		if(input.isKeyDown(Input.KEY_LSHIFT))
+			speed = 1.5f;
+		else
+			speed = 0.2f;
+		
 		if (!moving) {
 
 			tx = (int) x;
 			ty = (int) y;
-
+			
 			if (input.isKeyDown(Input.KEY_W)) {
-				dy = -speed;
+				dy = -1;
 				ty = (int) (y - tileWidth);
 				direction = UP;
 				moving = true;
 			} else if (input.isKeyDown(Input.KEY_S)) {
-				dy = speed;
+				dy = 1;
 				ty = (int) (y + tileWidth);
 				direction = DOWN;
 				moving = true;
 			} else if (input.isKeyDown(Input.KEY_A)) {
-				dx = -speed;
+				dx = -1;
 				tx = (int) (x - tileWidth);
 				direction = LEFT;
 				moving = true;
 			} else if (input.isKeyDown(Input.KEY_D)) {
-				dx = speed;
+				dx = 1;
 				tx = (int) (x + tileWidth);
 				direction = RIGHT;
 				moving = true;
 			}
-
+			
 			if (moving) {
 				anims[direction].start();
 			}
 		} else { // Clean this shit up later
 			
-			x += dx * delta;
-			y += dy * delta;
-//			Camera.xOff += dx * delta;
-//			Camera.yOff += dy * delta;
+			x += (dx * speed) * delta;
+			y += (dy * speed) * delta;
 
 			if (dy > 0 && y > ty) {
 				if (input.isKeyDown(Input.KEY_S)) {
@@ -176,9 +180,6 @@ public class EntityPlayer extends Entity {
 	}
 
 	public void render(Graphics g) {
-		// g.setColor(Color.white);
-		// g.fillRect(x + 1, y + 1, width - 2, height - 2);
-
 		anims[direction].draw(x - Camera.xOff, y - Camera.yOff);
 		g.setColor(Color.white);
 

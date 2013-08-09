@@ -34,7 +34,7 @@ public class GamePlayState extends GameState {
 	public void Init() {
 		player = new EntityPlayer(9, 58);
 
-		map = new Map("res/maps/test.json");
+		map = new Map("res/maps/test2.json");
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class GamePlayState extends GameState {
 			renderObjects = !renderObjects;
 		}
 		if (input.isKeyPressed(Input.KEY_NUMPAD2)) {
-			map = new Map("res/maps/test.json");
+			map = new Map("res/maps/test2.json");
 		}
 
 		player.update(delta, input);
@@ -64,15 +64,15 @@ public class GamePlayState extends GameState {
 		if (mapTileXStart < 0) {
 			mapTileXStart = 0;
 		}
-		if (mapTileXStart >= 39) {
-			mapTileXStart = 39;
+		if (mapTileXStart >= map.getWidth() - 21) { // 25 less
+			mapTileXStart = map.getWidth() - 21;
 		}
 		
 		if (mapTileYStart < 0) {
 			mapTileYStart = 0;
 		}
-		if (mapTileYStart >= 51) {
-			mapTileYStart = 51;
+		if (mapTileYStart >= map.getWidth() - 13) { // 13 less
+			mapTileYStart = map.getWidth() - 13;
 		}
 	}
 

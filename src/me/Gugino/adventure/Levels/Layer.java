@@ -23,7 +23,7 @@ public class Layer {
 
 		for (int i = 0; i <= tiles.length - 1; i++) {
 			for (int j = 0; j <= tiles[0].length - 1; j++) {
-				int id = Integer.parseInt(tileIds[(i * 64) + j].trim());
+				int id = Integer.parseInt(tileIds[(i * height) + j].trim());
 				tiles[i][j] = new Tile(id);
 			}
 		}
@@ -57,6 +57,12 @@ public class Layer {
 	public String getName() {
 		return name;
 	}
+	public int getWidth() {
+		return width;
+	}
+	public int getHeight() {
+		return height;
+	}
 
 	public void renderPortion(int sx, int sy, int rWidth, int rHeight) {
 		renderPortionWithOffset(sx, sy, rWidth, rHeight, 0, 0);
@@ -69,8 +75,8 @@ public class Layer {
 				int yt;
 
 				if (tiles[i][j].getTileID() != 0) {
-					xt = tiles[i][j].getTileID() % 16 - 1;
-					yt = (int) Math.floor(tiles[i][j].getTileID() / 16);
+					xt = tiles[i][j].getTileID() % spriteSheet.getNumTilesX() - 1;
+					yt = (int) Math.floor(tiles[i][j].getTileID() / spriteSheet.getNumTilesY());
 					
 					spriteSheet.getSubImages()[yt][xt].draw((j * 64) - (int) xOff, (i * 64) - (int) yOff);
 				}

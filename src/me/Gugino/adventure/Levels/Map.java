@@ -102,4 +102,8 @@ public class Map {
 	public void renderLayerFull(Graphics g, int index) {
 		layers.get(index).RenderAll(g);
 	}
+	
+	public int getWidth() {
+		return layers.get(0).getWidth();
+	}
 }
