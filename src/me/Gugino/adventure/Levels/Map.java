@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 
 public class Map {
 	private ArrayList<Layer> layers;
-	private ArrayList<MapObject> objects;
+	private ArrayList<MapObject> objects; ////
 	private ArrayList<SpriteSheet> spriteSheets;
 
 	public Map(String filePath) {
@@ -115,13 +115,13 @@ public class Map {
 
 	public void renderPortion(int sx, int sy, int width, int height) {
 		for (Layer l : layers) {
-			l.renderPortion(sx, sy, width, height);
+			l.renderPortion(sx, sy, width, height, spriteSheets);
 		}
 	}
 
 	public void renderPortion(int sx, int sy, int width, int height, float xOff, float yOff) {
 		for (Layer l : layers) {
-			l.renderPortionWithOffset(sx, sy, width, height, xOff, yOff);
+			l.renderPortionWithOffset(sx, sy, width, height, xOff, yOff, spriteSheets);
 		}
 	}
 
